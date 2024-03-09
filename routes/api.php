@@ -2,6 +2,7 @@
 
 // use Illuminate\Http\Request;
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/teste', function (Request $request) {
-    return $request->input("age");
+//Criar varias rotas com prefixo abaixo >>
+
+Route::group(['prefix' => '/product'], function(){
+    Route::post('/teste',[ProductController::class, 'teste']);
 });
+
+
 
 // all() - retorna todas as informaçoes independete do tipo
 
