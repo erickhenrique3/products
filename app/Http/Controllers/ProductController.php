@@ -12,7 +12,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -36,7 +36,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        // $update = $this->product->where('id', $id)->update($request->except(['_token', '_method']));
+
+        
     }
 
     /**
