@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name',40);
             $table->double('amount',8,2);
             $table->enum('active',['easy','hard']);
+            $table->longText('description');
             // $table->date('date');
             $table->timestamps();
         });
