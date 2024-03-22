@@ -4,23 +4,59 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        
+        //listagemmm
+        // jeito burro a seguir--> 
+
+        // return response()->json(Product::all());
+
+        //jeito inteligente a seguir -->>>
+
+        return response()->json(Product::paginate($request-> input('per_page') ?? 15));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        //
+        //validaçaoo--->>
+        $validation = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required|string|min:3|max:30|unique:products,name',
+                'amount' => 'required|numeric'
+            ],
+            // aqui e para mudar a mensagem no caso da verificação->>> abaixo
+            [
+                'name.required' => 'O campo nome é obrigatório',
+                'name.unique' => 'O nome ja está sendo utilizado'
+            ]
+        );
+
+        if ($validation->fails()) {
+            return response()->json($validation->errors(), 422);
+        }
+
+
+        $product = Product::create([
+            'name' => $request->input('name'),
+            'amount' => $request->input('amount'),
+            'description' => $request->input('description')
+        ]);
+
+        return response()->json([
+            'message' => 'Product created!',
+            'product' => $product
+        ]);
     }
 
     /**
@@ -28,7 +64,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        // (find) ele espera o id que vai passar pela model no caso o prdoduto
+        return response()->json(($product));
     }
 
     /**
@@ -38,7 +75,7 @@ class ProductController extends Controller
     {
         // $update = $this->product->where('id', $id)->update($request->except(['_token', '_method']));
 
-        
+
     }
 
     /**

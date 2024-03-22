@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name',40);
-            $table->double('amount',8,2);
-            $table->enum('active',['easy','hard']);
-            $table->longText('description');
+            $table->decimal('amount',8,2);
+            $table->enum('status',['activated','inactivated']);
+            $table->longText('description')->nullable();
             // $table->date('date');
             $table->timestamps();
         });
