@@ -20,7 +20,7 @@ class ProductController extends Controller
 
         //jeito inteligente a seguir -->>>
 
-        return response()->json(Product::paginate($request-> input('per_page') ?? 15));
+        return response()->json(Product::paginate($request->input('per_page') ?? 15));
     }
 
     /**
