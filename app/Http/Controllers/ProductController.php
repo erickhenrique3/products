@@ -74,6 +74,16 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         // $update = $this->product->where('id', $id)->update($request->except(['_token', '_method']));
+        $request->validate([
+            'name' => 'required',
+            'amount' => 'required|numeric',
+            'description' => 'required'
+        ]);
+
+        $product->update($request->all());
+
+        return response()->json(['message' => 'produto atualizado com sucesso'], 200);
+        
 
 
     }
