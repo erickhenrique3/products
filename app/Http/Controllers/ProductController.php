@@ -75,10 +75,14 @@ class ProductController extends Controller
     {
         // $update = $this->product->where('id', $id)->update($request->except(['_token', '_method']));
         $request->validate([
-            'name' => 'required',
-            'amount' => 'required|numeric',
-            'description' => 'required'
-        ]);
+            'name' => 'string|min:3|max:30|unique:products,name',
+            'amount' => 'numeric',
+            'description' => 'string'
+           
+        ],
+    
+      
+    );
 
         $product->update($request->all());
 
@@ -94,11 +98,12 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = Product::findOrFail($id);
+        // $product = Product::findOrFail($id);
+        //fucionando abaixoo>>>
         $product->delete();
-
+        
         return response()->json(['message' => 'Produto excluido com sucesso!'], 200);
     }
 }
