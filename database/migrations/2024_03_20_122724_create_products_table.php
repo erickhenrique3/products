@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('seller_id')->references('id')->on('sellers')->onDelete('cascade')->onUpdate('cascade');// chave 
             $table->string('name',40);
             $table->decimal('amount',8,2);
             $table->enum('status',['activated','inactivated']);

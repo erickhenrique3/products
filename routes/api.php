@@ -3,6 +3,7 @@
 // use Illuminate\Http\Request;
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SellerController;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::post('seller', [SellerController::class, 'create']);
 //Criar varias rotas com prefixo abaixo >>
 
 
