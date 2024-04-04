@@ -50,7 +50,8 @@ class ProductController extends Controller
         $product = Product::create([
             'name' => $request->input('name'),
             'amount' => $request->input('amount'),
-            'description' => $request->input('description')
+            'description' => $request->input('description'),
+            'seller_id' => 1
         ]);
 
         return response()->json([
