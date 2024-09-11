@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -107,4 +108,37 @@ class ProductController extends Controller
         
         return response()->json(['message' => 'Produto excluido com sucesso!'], 200);
     }
+
+     // INNER JOIN example
+     public function innerJoin()
+     {
+         $products = DB::table('products')
+             ->join('sellers', 'products.seller_id', '=', 'sellers.id')
+             ->select('products.*', 'sellers.name as seller_name')
+             ->get();
+ 
+         return response()->json($products);
+     }
+ 
+     // LEFT JOIN example
+     public function leftJoin()
+     {
+         $products = DB::table('products')
+             ->leftJoin('sellers', 'products.seller_id', '=', 'sellers.id')
+             ->select('products.*', 'sellers.name as seller_name')
+             ->get();
+ 
+         return response()->json($products);
+     }
+ 
+     // RIGHT JOIN example
+     public function rightJoin()
+     {
+         $products = DB::table('products')
+             ->rightJoin('sellers', 'products.seller_id', '=', 'sellers.id')
+             ->select('products.*', 'sellers.name as seller_name')
+             ->get();
+ 
+         return response()->json($products);
+     }
 }

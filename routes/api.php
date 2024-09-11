@@ -35,8 +35,18 @@ Route::prefix('product')->controller(ProductController::class)->group(function (
     Route::get('/{product}', 'show');
     Route::put('/{product}', 'update');
     Route::delete('/{product}', 'destroy');
-
 });
+
+
+// INNER JOIN: Retorna os dados que existem em ambas as tabelas (só retorna quando há correspondência entre products e sellers).
+Route::get('/inner', [ProductController::class, 'innerJoin']);
+
+// LEFT JOIN: Retorna todos os dados da tabela à esquerda (products), mesmo que não haja correspondência na tabela da direita (sellers).
+Route::get('/left', [ProductController::class, 'leftJoin']);
+
+
+// RIGHT JOIN: Retorna todos os dados da tabela à direita (sellers), mesmo que não haja correspondência na tabela da esquerda (products).
+Route::get('/right', [ProductController::class, 'rightJoin']);
     
 
 
